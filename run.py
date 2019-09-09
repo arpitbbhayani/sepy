@@ -26,6 +26,7 @@ if __name__ == '__main__':
     engine.tokenize()
     engine.normalize()
     engine.build_inverted_index()
+    engine.build_term_frequency()
 
     app = Flask(__name__)
     CORS(app, resources={r"/api/*": {"origins": "*"}})
