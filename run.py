@@ -2,11 +2,10 @@ import argparse
 import logging
 import coloredlogs
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_cors import CORS
 
-from sepy.entities import Config, Stats
-from sepy.part_01 import read_corpus
+from sepy.entities import Config, Engine
 
 
 coloredlogs.DEFAULT_LOG_FORMAT = '%(asctime)s:%(levelname)s: %(message)s'
@@ -19,19 +18,22 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     config = Config(args.datasetdir)
-    stats = Stats()
+    engine = Engine(config)
+
+    engine.read_corpus()
+    engine.cleanse()
+    engine.populate_excerpts()
+    engine.tokenize()
+    engine.normalize()
 
     app = Flask(__name__)
     CORS(app, resources={r"/api/*": {"origins": "*"}})
-
-    num_documents = read_corpus(config.datasetdir)
-    stats.num_documents = num_documents
 
     @app.route("/api/status")
     def status():
         return jsonify({
             "health": "ok",
-            "stats": stats.__dict__,
+            "stats": engine.get_stats(),
         })
 
     app.run(host="0.0.0.0", port=4000)
