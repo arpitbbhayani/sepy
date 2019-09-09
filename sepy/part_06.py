@@ -10,5 +10,15 @@ def build_inverted_index(documents):
       "tokens": ["hi", "i", "m", "harry", "potter"],  <-- use this
       "excerpt": "good looking excerpt"
     }
+
+    structure of inverted index
+
+    {
+      "word1": set of document ids where word1 exists,
+      "word2": set of document ids where word2 exists,
+      ...
+      ...
+      "wordn": set of document ids where wordn exists,
+    }
     """
     return {}

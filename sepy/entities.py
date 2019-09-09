@@ -4,6 +4,7 @@ from sepy.part_03 import get_excerpt
 from sepy.part_04 import tokenize
 from sepy.part_05 import normalize
 from sepy.part_06 import build_inverted_index
+from sepy.part_07 import search_v1
 
 
 class Engine:
@@ -39,3 +40,7 @@ class Engine:
 
     def build_inverted_index(self):
         self.index = build_inverted_index(self.documents)
+
+    def search_v1(self, query):
+        query_tokens = [normalize(t) for t in tokenize(cleanse(query))]
+        return search_v1(query_tokens, self.index)
