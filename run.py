@@ -1,8 +1,9 @@
+import time
 import argparse
 import logging
 import coloredlogs
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from sepy.entities import Engine
@@ -34,6 +35,24 @@ if __name__ == '__main__':
         return jsonify({
             "health": "ok",
             "stats": engine.get_stats(),
+        })
+
+    @app.route("/api/docs/<doc_id>")
+    def get_doc(doc_id):
+        start_time = time.time()
+        document = engine.get_doc(doc_id)
+        return jsonify({
+            "document": document,
+            "time": (time.time() - start_time) * 1000
+        })
+
+    @app.route("/api/search_v1")
+    def search_v1():
+        start_time = time.time()
+        documents = engine.search_v1(request.args.get('q'))
+        return jsonify({
+            "documents": documents,
+            "time": (time.time() - start_time) * 1000
         })
 
     app.run(host="0.0.0.0", port=4000)

@@ -41,6 +41,20 @@ class Engine:
     def build_inverted_index(self):
         self.index = build_inverted_index(self.documents)
 
+    def get_doc(self, doc_id):
+        return self.docmap.get(doc_id)
+
     def search_v1(self, query):
-        query_tokens = [normalize(t) for t in tokenize(cleanse(query))]
-        return search_v1(query_tokens, self.index)
+        query_tokens = [
+            normalize(t) for t in tokenize(cleanse(query))
+        ]
+
+        doc_ids = search_v1(query_tokens, self.index)[:10]
+
+        return [
+            {
+                "doc": self.get_doc(doc_id),
+                "score": 1
+            }
+            for doc_id in doc_ids
+        ]
