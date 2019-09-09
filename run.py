@@ -5,7 +5,7 @@ import coloredlogs
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from sepy.entities import Config, Engine
+from sepy.entities import Engine
 
 
 coloredlogs.DEFAULT_LOG_FORMAT = '%(asctime)s:%(levelname)s: %(message)s'
@@ -17,14 +17,14 @@ if __name__ == '__main__':
     parser.add_argument("--datasetdir", help="path to dataset folder")
     args = parser.parse_args()
 
-    config = Config(args.datasetdir)
-    engine = Engine(config)
+    engine = Engine(args.datasetdir)
 
     engine.read_corpus()
     engine.cleanse()
     engine.populate_excerpts()
     engine.tokenize()
     engine.normalize()
+    engine.build_inverted_index()
 
     app = Flask(__name__)
     CORS(app, resources={r"/api/*": {"origins": "*"}})
