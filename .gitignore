@@ -1,0 +1,6 @@
+venv
+data
+*.pyc
+*.pyo
+.DS_Store
+.vscode
