@@ -20,7 +20,21 @@ class Engine:
 
     def get_stats(self):
         return {
-            "count_documents": len(self.documents)
+            "count_documents": len(self.documents),
+            "parts_completed": {
+                1: len(self.documents) > 0,
+                2: cleanse("Harry Potter") == "harry potter",
+                3: bool(len(self.documents) > 0 and self.documents[0].get("excerpt")),
+                4: len(tokenize("harry potter")) > 0 and \
+                        isinstance(tokenize("harry potter"), (list, tuple, set)),
+                5: normalize("houses") == "hous",
+                6: len(self.index) > 0,
+                7: len(self.search_v1("harry potter")) > 0,
+                8: len(self.term_frequency) > 0,
+                9: ranking_fn([], "id", {}, {}) != 1,
+                10: len(self.search_v1("harry potter")) > 0,
+            },
+            "total_parts": 10,
         }
 
     def read_corpus(self):
