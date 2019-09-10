@@ -42,16 +42,16 @@ class Engine:
 
     def cleanse(self):
         for doc in self.documents:
-            doc["text"] = cleanse(doc["text"])
+            doc["body"] = cleanse(doc["body"])
 
     def populate_excerpts(self):
         for doc in self.documents:
-            doc["excerpt"] = get_excerpt(doc["text"])
+            doc["excerpt"] = get_excerpt(doc["body"])
             self.docmap[doc["id"]] = doc
 
     def tokenize(self):
         for doc in self.documents:
-            doc["tokens"] = tokenize(doc["text"])
+            doc["tokens"] = tokenize(doc["body"])
 
     def normalize(self):
         for doc in self.documents:

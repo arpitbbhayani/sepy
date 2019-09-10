@@ -29,13 +29,12 @@ if __name__ == '__main__':
     engine.build_term_frequency()
 
     app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"*": {"origins": "*"}})
 
     @app.route("/api/status")
     def status():
         return jsonify({
-            "health": "ok",
-            "stats": engine.get_stats(),
+            "progress": engine.get_stats(),
         })
 
     @app.route("/api/docs/<doc_id>")
