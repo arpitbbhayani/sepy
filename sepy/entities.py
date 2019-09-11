@@ -49,7 +49,9 @@ class Engine:
         self.documents = read_corpus(self.datasetdir)
 
     def get_random_documents(self):
-        return random.choices(self.documents, k=10)
+        if len(self.documents) < 10:
+            return self.documents
+        return random.sample(self.documents, 10)
 
     def get_total_documents(self):
         return len(self.documents)
