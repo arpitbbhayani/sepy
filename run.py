@@ -112,7 +112,7 @@ if __name__ == '__main__':
                 "document": engine.get_doc(k),
                 "frequency": v,
             }
-            for k, v in doc_freq
+            for k, v in doc_freq.items()
         ]
         return jsonify({
             "frequencies": term_freqs,
