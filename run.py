@@ -34,48 +34,62 @@ if __name__ == '__main__':
 
     @app.route("/api/status")
     def status():
+        start_time = time.time()
         return jsonify({
             "progress": engine.get_stats(),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/1")
     def status_1():
+        start_time = time.time()
         return jsonify({
             "documents": engine.get_random_documents(),
             "total_documents": engine.get_total_documents(),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/2")
     def status_2():
+        start_time = time.time()
         return jsonify({
             "text": cleanse(request.args.get('text') or ''),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/3")
     def status_3():
+        start_time = time.time()
         return jsonify({
             "text": get_excerpt(request.args.get('text') or ''),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/4")
     def status_4():
+        start_time = time.time()
         return jsonify({
             "tokens": tokenize(request.args.get('text') or ''),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/5")
     def status_5():
+        start_time = time.time()
         return jsonify({
             "text": normalize(request.args.get('text') or ''),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/6")
     def status_6():
+        start_time = time.time()
         return jsonify({
             "documents": [
                 engine.get_doc(doc_id)
-                for doc_id in engine.index.get(request.args.get('word'))[:10]
+                for doc_id in (engine.index.get(request.args.get('text')) or [])[:10]
             ],
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/search_v1")
@@ -89,6 +103,7 @@ if __name__ == '__main__':
 
     @app.route("/api/status/8")
     def status_8():
+        start_time = time.time()
         word = request.args.get('word') or ''
         doc_freq = engine.term_frequency.get(word) or {}
         term_freqs = [
@@ -101,15 +116,18 @@ if __name__ == '__main__':
         ]
         return jsonify({
             "frequencies": term_freqs,
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/status/9")
     def status_9():
+        start_time = time.time()
         query = request.args.get('q') or ''
         doc_id = request.args.get('doc_id')
         return jsonify({
-            "frequencies": ranking_fn(get_query_tokens(query), doc_id,
-                                      engine.index, engine.term_frequency),
+            "score": ranking_fn(get_query_tokens(query), doc_id,
+                                engine.index, engine.term_frequency),
+            "time": (time.time() - start_time) * 1000
         })
 
     @app.route("/api/search_v2")

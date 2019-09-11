@@ -49,9 +49,16 @@ class Engine:
         self.documents = read_corpus(self.datasetdir)
 
     def get_random_documents(self):
+        docs = []
         if len(self.documents) < 10:
-            return self.documents
-        return random.sample(self.documents, 10)
+            docs = self.documents
+        docs = random.sample(self.documents, 10)
+        return [
+            {
+                "doc": d
+            }
+            for d in docs
+        ]
 
     def get_total_documents(self):
         return len(self.documents)
@@ -80,7 +87,9 @@ class Engine:
         self.term_frequency = build_term_frequency(self.documents)
 
     def get_doc(self, doc_id):
-        return self.docmap.get(doc_id)
+        return {
+            "doc": self.docmap.get(doc_id)
+        }
 
     def search_v1(self, query):
         query_tokens = get_query_tokens(query)
@@ -89,7 +98,7 @@ class Engine:
 
         return [
             {
-                "doc": self.get_doc(doc_id),
+                "doc": self.get_doc(doc_id)["doc"],
                 "score": 1
             }
             for doc_id in doc_ids
@@ -102,7 +111,7 @@ class Engine:
 
         return [
             {
-                "doc": self.get_doc(doc_id),
+                "doc": self.get_doc(doc_id)["doc"],
                 "score": score
             }
             for doc_id, score in results
