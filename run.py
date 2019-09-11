@@ -115,7 +115,7 @@ if __name__ == '__main__':
             for k, v in doc_freq.items()
         ]
         return jsonify({
-            "frequencies": term_freqs,
+            "frequencies": term_freqs[:25],
             "time": (time.time() - start_time) * 1000
         })
 
