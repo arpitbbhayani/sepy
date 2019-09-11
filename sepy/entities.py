@@ -1,3 +1,5 @@
+import random
+
 from sepy.part_01 import read_corpus
 from sepy.part_02 import cleanse
 from sepy.part_03 import get_excerpt
@@ -8,6 +10,12 @@ from sepy.part_07 import search_v1
 from sepy.part_08 import build_term_frequency
 from sepy.part_09 import ranking_fn
 from sepy.part_10 import search_v2
+
+
+def get_query_tokens(query):
+    return[
+        normalize(t) for t in tokenize(cleanse(query))
+    ]
 
 
 class Engine:
@@ -40,6 +48,12 @@ class Engine:
     def read_corpus(self):
         self.documents = read_corpus(self.datasetdir)
 
+    def get_random_documents(self):
+        return random.choices(self.documents, k=10)
+
+    def get_total_documents(self):
+        return len(self.documents)
+
     def cleanse(self):
         for doc in self.documents:
             doc["body"] = cleanse(doc["body"])
@@ -67,9 +81,7 @@ class Engine:
         return self.docmap.get(doc_id)
 
     def search_v1(self, query):
-        query_tokens = [
-            normalize(t) for t in tokenize(cleanse(query))
-        ]
+        query_tokens = get_query_tokens(query)
 
         doc_ids = search_v1(query_tokens, self.index)[:10]
 
@@ -82,9 +94,7 @@ class Engine:
         ]
 
     def search_v2(self, query):
-        query_tokens = [
-            normalize(t) for t in tokenize(cleanse(query))
-        ]
+        query_tokens = get_query_tokens(query)
 
         results = search_v2(query_tokens, self.index, self.term_frequency, ranking_fn)[:10]
 
