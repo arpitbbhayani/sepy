@@ -1,3 +1,4 @@
+import sys
 import time
 import argparse
 import logging
@@ -18,6 +19,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--datasetdir", help="path to dataset folder")
     args = parser.parse_args()
+
+    if not args.datasetdir or not os.path.exists(args.datasetdir):
+        print("Please pass the argument --datasetdir with path to your data set folder to start the server.")
+        sys.exit(1)
 
     engine = Engine(args.datasetdir)
 
