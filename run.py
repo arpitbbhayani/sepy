@@ -105,7 +105,7 @@ if __name__ == '__main__':
         start_time = time.time()
         documents = engine.search_v1(request.args.get('q'))
         return jsonify({
-            "documents": documents,
+            "documents": documents[:10],
             "time": (time.time() - start_time) * 1000
         })
 

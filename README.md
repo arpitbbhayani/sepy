@@ -33,3 +33,4 @@ python run.py --datasetdir ~/data/datasets
 ## Datasets
 
  - [Harry Potter Dataset](https://drive.google.com/open?id=1y3nuA9H9YTtbv-aazhcMFunioM2OwH5u)
+ - [Harry Potter Dataset Subset](https://drive.google.com/open?id=15cb27fzomD-OTsYtkihilYUzwfmJuxwj)
