@@ -90,10 +90,12 @@ if __name__ == '__main__':
     @app.route("/api/status/6")
     def status_6():
         start_time = time.time()
+        word = request.args.get('text')
+        word = normalize(cleanse(word))
         return jsonify({
             "documents": [
                 engine.get_doc(doc_id)
-                for doc_id in (engine.index.get(request.args.get('text')) or [])[:10]
+                for doc_id in list((engine.index.get(word) or []))[:10]
             ],
             "time": (time.time() - start_time) * 1000
         })
