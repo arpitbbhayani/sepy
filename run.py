@@ -113,6 +113,7 @@ if __name__ == '__main__':
     def status_8():
         start_time = time.time()
         word = request.args.get('word') or ''
+        word = normalize(cleanse(word))
         doc_freq = engine.term_frequency.get(word) or {}
         term_freqs = [
             {
