@@ -13,6 +13,12 @@ python3.7
 pip install -r requirements.txt
 ```
 
+## Initial setup
+```
+import nltk
+ nltk.download('stopwords')
+```
+
 ## Linting
 ```
 pylint sepy
