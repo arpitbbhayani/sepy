@@ -5,4 +5,4 @@ def tokenize(text):
     Ex: "hi i'm harry potter nice to meet you"
     Return ["hi", "im", "harry" ...]
     """
-    return []
+    return text.split()

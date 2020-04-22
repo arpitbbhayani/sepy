@@ -17,4 +17,17 @@ def search_v2(query_tokens, inverted_index, term_frequency_map, ranking_fn):
     1st element -> Document id
     2nd element -> Score
     """
-    return []
+    docs = None
+    for token in query_tokens:
+        if docs is None:
+            docs = inverted_index.get(token, set())
+        else:
+            docs = docs.intersection(inverted_index.get(token, set()))
+    
+    return sorted([
+      (
+        d,
+        ranking_fn(query_tokens, d, inverted_index, term_frequency_map),
+      )
+      for d in docs
+    ], key=lambda x: x[1], reverse=True)

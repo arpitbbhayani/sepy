@@ -1,3 +1,6 @@
+import re
+
+
 def cleanse(text):
     """Given a string `text`, the function should return
     another a "cleansed" string that you want to pass to
@@ -12,4 +15,4 @@ def cleanse(text):
       - case-folding
       - decide which characters are junk and remove them
     """
-    return text
+    return re.sub(r'[^a-zA-Z0-9]', ' ', text.lower())

@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 def build_inverted_index(documents):
     """Given a list of documents and return inverted index.
 
@@ -21,4 +23,8 @@ def build_inverted_index(documents):
       "wordn": set of document ids where wordn exists,
     }
     """
-    return {}
+    ii = defaultdict(set)
+    for doc in documents:
+      for token in doc['tokens']:
+        ii[token].add(doc['id'])
+    return ii

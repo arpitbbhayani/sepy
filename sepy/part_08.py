@@ -1,3 +1,6 @@
+from collections import defaultdict, Counter
+
+
 def build_term_frequency(documents):
     """Given list of documents, return term frequency map
 
@@ -19,4 +22,9 @@ def build_term_frequency(documents):
       }
     }
     """
-    return {}
+    tf = defaultdict(dict)
+    for doc in documents:
+      cmap = Counter(doc["tokens"])
+      for token in doc["tokens"]:
+        tf[token][doc["id"]] = cmap[token]
+    return tf
