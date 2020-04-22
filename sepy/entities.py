@@ -50,6 +50,8 @@ class Engine:
 
     def get_random_documents(self):
         docs = []
+        if not self.documents:
+            return []
         if len(self.documents) < 10:
             docs = self.documents
         docs = random.sample(self.documents, 10)

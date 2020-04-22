@@ -8,15 +8,16 @@ sepy is a very "Search Engine written in Python" to be used for education.
 python3.7
 ```
 
-## Setting up
+## Setting up Virtualenv
+
 ```
-pip install -r requirements.txt
+virtualenv venv -p `which python3.7`
+. venv/bin/activate
 ```
 
-## Initial setup
+## Installing packages
 ```
-import nltk
- nltk.download('stopwords')
+pip install -r requirements.txt
 ```
 
 ## Linting
