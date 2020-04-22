@@ -3,6 +3,9 @@ def search_v2(query_tokens, inverted_index, term_frequency_map, ranking_fn):
     and ranking function  return the list of document IDs and score that you think
     should be served as search results.
 
+    Check part_09 to understand signatire of ranking_fn
+    Check part_08 to understand the structure of term_frequency_map
+
     The results should be sorted w.r.t score.
 
     Result should be a list of tuple

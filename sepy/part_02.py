@@ -6,7 +6,7 @@ def cleanse(text):
     Ex: given a string "{{Hi! I'm Harry Potter. Nice to meet you]]"
     convert it to
 
-    "hi i'm harry potter nice to meet you"
+    "hi im harry potter nice to meet you"
 
     You need to do the following
       - case-folding
