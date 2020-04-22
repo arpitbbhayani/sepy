@@ -2,6 +2,10 @@
 
 sepy is a very "Search Engine written in Python" to be used for education.
 
+To build your search engine you need to complete part_01 to part_10. Each of the segments
+has a function that represents one important piece in your search engine.
+You can visualize the results using a web frontend [sepy-fr](https://github.com/arpitbbhayani/sepy-fr).
+
 ## Requirements
 
 ```
