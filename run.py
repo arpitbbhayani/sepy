@@ -46,6 +46,16 @@ if __name__ == '__main__':
             "time": (time.time() - start_time) * 1000
         })
 
+    @app.route("/api/status/1/reload", methods=["POST"])
+    def status_1_reload():
+        start_time = time.time()
+        engine.read_corpus()
+        return jsonify({
+            "documents": engine.get_random_documents(),
+            "total_documents": engine.get_total_documents(),
+            "time": (time.time() - start_time) * 1000
+        })
+
     @app.route("/api/status/1")
     def status_1():
         start_time = time.time()
