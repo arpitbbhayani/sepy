@@ -142,7 +142,7 @@ if __name__ == '__main__':
     def status_9():
         start_time = time.time()
         query = request.args.get('q') or ''
-        doc_id = request.args.get('doc_id')
+        doc_id = request.args.get('docId')
         return jsonify({
             "score": ranking_fn(get_query_tokens(query), doc_id,
                                 engine.index, engine.term_frequency),
