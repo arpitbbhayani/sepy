@@ -4,7 +4,7 @@ Flask==1.1.2
 Flask-Cors==3.0.8
 humanfriendly==8.2
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 joblib==0.14.1
 MarkupSafe==1.1.1
 nltk==3.5
